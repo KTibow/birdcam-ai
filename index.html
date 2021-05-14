@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Camera Stream</title>
+    <style>
+html {
+  background: #333;
+}
+body {
+  display: flex;
+  min-height: calc(100vh - 16px);
+  justify-content: center;
+  align-items: center;
+}
+    </style>
+  </head>
+  <body>
+    <img src="/image?n=0" />
+    <script>
+window.counter = 0;
+const updateImage = () => {
+  if (document.hasFocus()) {
+    var image = document.querySelector("img");
+    image.src = image.src.replace(
+      "?n=" + String(window.counter),
+      "?n=" + String(window.counter + 1)
+    );
+    window.counter += 1;
+  }
+};
+document.querySelector("img").onload = updateImage;
+window.onfocus = updateImage;
+    </script>
+  </body>
+</html>

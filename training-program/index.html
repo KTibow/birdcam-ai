@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Camera Snap</title>
+    <style>
+body {
+  overflow: hidden;
+}
+img {
+  width: calc(100vmin - 16px);
+}
+    </style>
+  </head>
+  <body>
+    <img src="/?n=0" />
+    <script>
+window.counter = 0;
+const delayedUpdate = () => {
+  setTimeout(updateImage, 1000);
+}
+const updateImage = () => {
+  if (document.hasFocus()) {
+    var image = document.querySelector("img");
+    image.src = image.src.replace(
+      "?n=" + String(window.counter),
+      "?n=" + String(window.counter + 1)
+    );
+    window.counter += 1;
+  }
+};
+document.querySelector("img").onload = delayedUpdate;
+window.onfocus = delayedUpdate;
+    </script>
+  </body>
+</html>
