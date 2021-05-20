@@ -49,7 +49,7 @@ for pin in [joystick_up, main_button]:
 
 def convert_clips():
   print("Converting clips...")
-  for clip in glob.glob("*.mjpeg"):
+  for clip in glob.glob("captured_data/*.mjpeg"):
     new_clip_name = clip.replace("mjpeg", "mp4")
     os.system(f'ffmpeg -y -r 15 -i "{clip}" "{new_clip_name}"')
     os.remove(clip)
@@ -87,6 +87,9 @@ def predict_loop():
     prediction = label
 
     cam.annotate_text = f"{label} {conf}%"
+
+    time.sleep(1 / 14)
+
     if last_prediction != label:
       print(cam.annotate_text)
       test_image.save(f"captured_data/{label} {strftime('%j %-I-%M-%S %p')}.jpeg")
